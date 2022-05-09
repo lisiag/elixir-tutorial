@@ -4,8 +4,10 @@ defmodule M do
     IO.puts "Hello #{name}"
   end
 
-  def execute_data_stuff do
+  def execute_stuff do
     data_stuff()
+    IO.puts ""
+    string_stuff()
   end
 
   def data_stuff do
@@ -19,6 +21,29 @@ defmodule M do
     IO.puts "#{my_int} is float: #{is_float(my_int)}"
     IO.puts "#{my_atom} is atom: #{is_atom(my_atom)}"
     IO.puts "#{my_atom2} is atom: #{is_atom(my_atom2)}"
+    Enum.map(on_to_10, fn(x) -> IO.puts x end)
+  end
+
+  def string_stuff do
+    my_str = "my string"
+    IO.puts "Length: #{String.length(my_str)}"
+    longer_str = my_str <> " " <> "is longer"
+    IO.puts longer_str
+    IO.puts "Equal Egg egg: #{"Egg" === "egg"}"
+    IO.puts "Equal Egg Egg #{"Egg" === "Egg"}"
+    IO.puts "Contains ng? #{String.contains?(my_str, "ng")}"
+    IO.puts "First: #{String.first(my_str)}"
+    IO.puts "Index 4: #{String.at(my_str, 4)}"
+    IO.puts "Substring: #{String.slice(my_str, 3, 2)}"
+    IO.inspect String.split(longer_str, " ")
+    IO.puts String.reverse(longer_str)
+    IO.puts String.upcase(my_str)
+    # Piping
+    4 * 10 |> IO.puts
+  end
+
+  def math_stuff do
+
   end
 
 end
