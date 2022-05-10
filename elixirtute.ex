@@ -105,6 +105,7 @@ defmodule M do
 
   def list_stuff do
     list1 = [1,2,3]
+    Enum.each(list1, &IO.puts/1)
     list2 = [4,5,6]
     list3 = list1 ++ list2
     [head | tail] = list3
@@ -141,8 +142,60 @@ defmodule M do
   def display_list([]), do: nil
 
   def map_stuff do
+    IO.puts "Get element from map"
+    capitals = %{"Alabama" => "Montgomery",
+                 "Alaska" => "Juneau",
+                 "Arizona" => "Phoenixxx"}
+    IO.puts capitals["Alaska"]
+    IO.puts Map.get(capitals, "Alaska")
+
+    capitals2 = %{alabama: "Montgomery",
+                 alaska: "Juneau",
+                  arizona: "Phoenix"}
+    IO.puts capitals2.alaska
+    IO.puts "Display each value in map"
+    Enum.each(capitals2, fn({_key, val}) -> IO.puts val end)
+    IO.puts "Create a new map, modifying one element and adding one new element"
+    # can't insert/update into existing map because in Elixir data is always immutable. Must assign to new var or override original var
+    capitals3 = capitals |> Map.put("Arkansas", "Little Rock") |> Map.put("Arizona", "Phoenix")
+    IO.inspect capitals3
+    IO.puts ""
+    # a shorter way to achieve the same map as capitals3
+    capitals4 = Map.merge(capitals, %{"Arkansas" => "Little Rock", "Arizona" => "Phoenix"})
+    IO.inspect capitals4
+    IO.puts "Another way to create new map with modifications but not additions is with pipe"
+    capitals5 = %{capitals | "Arizona" => "Phoenix"}
+    IO.inspect capitals5
+    IO.puts ""
+    temperatures = %{
+      "Monday" => 28,
+      "Tuesday" => 29,
+      "Wednesday" => 29,
+      "Thursday" => 24,
+      "Friday" => 16,
+      "Saturday" => 16,
+      "Sunday" => 20
+    }
+    convertedMap = Enum.map(temperatures, fn {day, temp} -> {day, temp * 1.8 + 32} end)
+    IO.inspect convertedMap
+    # Enum.map returns an array. Convert to map
+    IO.inspect Enum.into(convertedMap, %{})
+    convertedArray = Enum.map(temperatures, fn {_day, temp} -> temp * 1.8 + 32 end)
+    IO.inspect convertedArray
+
+    # Using pipe operator instead of creating var at each step
+    %{
+      Josiah: 1995,
+      Tessa: 1997,
+      Lisia: 1971,
+      Geoff: 1969
+    }
+    |> Enum.map(fn {name, yob} -> {name, 2022-yob} end)
+    |> Enum.into(%{})
+    |> IO.inspect
   end
 
+  #IO.inspect convertedMap
 
 
 end
