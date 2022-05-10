@@ -8,6 +8,16 @@ defmodule M do
     data_stuff()
     IO.puts ""
     string_stuff()
+    IO.puts ""
+    math_stuff()
+    IO.puts ""
+    compare_stuff()
+    IO.puts ""
+    tuple_stuff()
+    IO.puts ""
+    list_stuff()
+    IO.puts ""
+    map_stuff()
   end
 
   def data_stuff do
@@ -29,8 +39,6 @@ defmodule M do
     IO.puts "Length: #{String.length(my_str)}"
     longer_str = my_str <> " " <> "is longer"
     IO.puts longer_str
-    IO.puts "Equal Egg egg: #{"Egg" === "egg"}"
-    IO.puts "Equal Egg Egg #{"Egg" === "Egg"}"
     IO.puts "Contains ng? #{String.contains?(my_str, "ng")}"
     IO.puts "First: #{String.first(my_str)}"
     IO.puts "Index 4: #{String.at(my_str, 4)}"
@@ -43,7 +51,98 @@ defmodule M do
   end
 
   def math_stuff do
-
+    IO.puts div(13, 4)
+    IO.puts rem(13, 4)
   end
+
+  def compare_stuff do
+    IO.puts "Egg == Egg #{"Egg" == "Egg"}"
+    IO.puts "Egg === Egg #{"Egg" === "Egg"}"
+    IO.puts 4 == 4.0
+    IO.puts 4 === 4.0
+    IO.puts 4 != 4.0
+    IO.puts 4 !== 4.0
+
+    unless 5 < 2 do
+      IO.puts "Inside unless block"
+    end
+
+    cond do
+      5 < 2 -> IO.puts "5 < 2"
+      5 > 2 -> IO.puts "5 > 2"
+      5 >= 2 -> IO.puts "This is true too"
+      true -> IO.puts "default"
+    end
+
+    case 3 do
+      1 -> IO.puts "one"
+      2 -> IO.puts "two"
+      _ -> IO.puts "default"
+    end
+
+    IO.puts "Ternary:"
+    if 7 > 1, do: (IO.puts "7 > 1"), else: (IO.puts "Huh?")
+  end
+
+  def tuple_stuff do
+    my_tuple = {1, 22, :green, "sunny"}
+    IO.puts is_tuple(my_tuple)
+    IO.puts elem(my_tuple, 2)
+    IO.puts tuple_size(my_tuple)
+    my_tuple2 = Tuple.append(my_tuple, 33)
+    IO.puts "my_tuple2 *** "
+    IO.inspect my_tuple2
+    my_el = Tuple.delete_at(my_tuple, 1)
+    IO.puts "my_el *** "
+    IO.inspect my_el
+    IO.puts tuple_size(my_el)
+    my_tuple = {2, 33, :yellow, "misty"}
+    many_zeros = Tuple.duplicate(0, 50)
+    IO.puts tuple_size(many_zeros)
+    {_id, _age, _fav_color, fav_weather} = my_tuple # var names prefixed with _ because they are unused
+    IO.puts fav_weather
+  end
+
+  def list_stuff do
+    list1 = [1,2,3]
+    list2 = [4,5,6]
+    list3 = list1 ++ list2
+    [head | tail] = list3
+    IO.puts head
+    IO.puts "Tail *** "
+    IO.inspect tail
+    list4 = list3 -- list1
+    IO.puts "list4 ***"
+    IO.inspect list4
+    IO.puts "***"
+    IO.inspect [97, 98]
+    IO.puts "***"
+    IO.inspect [97, 98], charlists: :as_lists
+    Enum.each tail, fn item ->
+      IO.puts item
+    end
+    IO.puts "Recursion with delete item:"
+    IO.puts display_list(List.delete(tail, 3))
+    IO.puts "Delete at index:"
+    IO.puts display_list(List.delete_at(tail, 0))
+    IO.puts "Original list not modified by List.delete()"
+    display_list(tail)
+    IO.puts List.first(tail)
+    IO.puts List.last(tail)
+    list_of_tuples = [name: "Lisia", eye_color: "grey"]
+    IO.puts list_of_tuples[:name]
+  end
+
+  def display_list([head | tail]) do
+    IO.puts head
+    display_list(tail)
+  end
+
+  def display_list([]), do: nil
+
+  def map_stuff do
+  end
+
+
 
 end
