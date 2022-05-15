@@ -18,6 +18,8 @@ defmodule M do
     list_stuff()
     IO.puts ""
     map_stuff()
+    IO.puts ""
+    pattern_matching()
   end
 
   def data_stuff do
@@ -195,7 +197,12 @@ defmodule M do
     |> IO.inspect
   end
 
-  #IO.inspect convertedMap
+  def pattern_matching do
+    [length, width] = [20, 30]
+    IO.puts width
+    [_, [_, a]] = [10, [30, 40]]
+    IO.puts a
+  end
 
 
 end
