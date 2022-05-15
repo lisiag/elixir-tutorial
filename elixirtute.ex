@@ -24,6 +24,8 @@ defmodule M do
     anon_functions()
     IO.puts ""
     recursion()
+    IO.puts ""
+    enumerables()
   end
 
   def data_stuff do
@@ -248,5 +250,26 @@ defmodule M do
       IO.puts "Num : #{max}"
       loop(max - 1, min)
     end
+  end
+
+  def enumerables() do
+    # Are all of the list elements even?
+    IO.puts Enum.all?([1, 2, 3],
+      fn(n) -> rem(n, 2) == 0 end)
+    IO.puts Enum.all?([2, 4, 6],
+      fn(n) -> rem(n, 2) == 0 end)
+
+    IO.puts Enum.any?([1, 2, 3],
+      fn(n) -> rem(n, 2) == 0 end)
+
+    Enum.each([1, 2, 3], fn(n) -> IO.puts "List elem: #{n}" end)
+
+    sum_vals = Enum.reduce([1, 2, 3], fn(n, sum) -> n + sum end)
+    IO.puts sum_vals
+    # same thing but with an accumulator (initial value)
+    sum_vals2 = Enum.reduce([1, 2, 3], 33, fn(n, sum) -> n + sum end)
+    IO.puts sum_vals2
+
+    IO.inspect Enum.uniq([1, 2, 2, 3])
   end
 end
