@@ -22,6 +22,8 @@ defmodule M do
     pattern_matching()
     IO.puts ""
     anon_functions()
+    IO.puts ""
+    recursion()
   end
 
   def data_stuff do
@@ -228,5 +230,23 @@ defmodule M do
     x + y
   end
 
+  def recursion do
+    IO.puts  sum([1,2,3])
+    loop(5,1)
+  end
 
+  def sum([]), do: 0
+
+  def sum([head|tail]), do: head + sum(tail)
+
+  def loop(0, _), do: nil
+
+  def loop(max, min) do
+    if max < min do
+      loop(0, min)
+    else
+      IO.puts "Num : #{max}"
+      loop(max - 1, min)
+    end
+  end
 end
