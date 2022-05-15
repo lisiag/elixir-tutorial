@@ -20,6 +20,8 @@ defmodule M do
     map_stuff()
     IO.puts ""
     pattern_matching()
+    IO.puts ""
+    anon_functions()
   end
 
   def data_stuff do
@@ -198,10 +200,32 @@ defmodule M do
   end
 
   def pattern_matching do
-    [length, width] = [20, 30]
+    [_length, width] = [20, 30]
     IO.puts width
     [_, [_, a]] = [10, [30, 40]]
     IO.puts a
+  end
+
+  def anon_functions do
+    add_two = fn (x, y) -> x + y end
+    IO.puts add_two.(3, 4)
+    add_two2 = &(&1 + &2)
+    IO.puts add_two2.(3, 4)
+    # overloading
+    add_sum = fn
+      {x, y} -> x + y
+      {x, y, z} -> x + y + z
+    end
+    IO.puts add_sum.({3, 4})
+    IO.puts add_sum.({3, 4, 5})
+    # default values for parameters
+
+    IO.puts do_it(3, 4)
+    IO.puts do_it()
+  end
+
+  def do_it(x \\1, y \\2) do
+    x + y
   end
 
 
