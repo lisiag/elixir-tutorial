@@ -26,6 +26,8 @@ defmodule M do
     recursion()
     IO.puts ""
     enumerables()
+    IO.puts ""
+    list_comprehensions()
   end
 
   def data_stuff do
@@ -271,5 +273,13 @@ defmodule M do
     IO.puts sum_vals2
 
     IO.inspect Enum.uniq([1, 2, 2, 3])
+  end
+
+  def list_comprehensions() do
+    dbl_list = for n <- [1, 2, 3], do: n * 2
+    IO.inspect dbl_list
+
+    even_list = for n <- [1, 2, 3, 4], rem(n, 2) == 0, do: n
+    IO.inspect even_list
   end
 end
