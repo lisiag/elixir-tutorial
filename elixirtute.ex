@@ -28,6 +28,8 @@ defmodule M do
     enumerables()
     IO.puts ""
     list_comprehensions()
+    IO.puts ""
+    exception_handling()
   end
 
   def data_stuff do
@@ -281,5 +283,13 @@ defmodule M do
 
     even_list = for n <- [1, 2, 3, 4], rem(n, 2) == 0, do: n
     IO.inspect even_list
+  end
+
+  def exception_handling() do
+    err = try do 5 / 0
+          rescue
+            ArithmeticError -> "Can't divide by zero"
+          end
+    IO.puts err
   end
 end
