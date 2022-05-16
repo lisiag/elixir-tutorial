@@ -30,6 +30,8 @@ defmodule M do
     list_comprehensions()
     IO.puts ""
     exception_handling()
+    IO.puts ""
+    concurrency()
   end
 
   def data_stuff do
@@ -162,7 +164,7 @@ defmodule M do
     IO.puts Map.get(capitals, "Alaska")
 
     capitals2 = %{alabama: "Montgomery",
-                 alaska: "Juneau",
+                  alaska: "Juneau",
                   arizona: "Phoenix"}
     IO.puts capitals2.alaska
     IO.puts "Display each value in map"
@@ -291,5 +293,24 @@ defmodule M do
             ArithmeticError -> "Can't divide by zero"
           end
     IO.puts err
+  end
+
+  def concurrency do
+    # spawn new process
+    spawn(fn() -> loop(50, 1) end)
+    spawn(fn() -> loop(100, 50) end)
+
+    # send a message to a process
+    send(self(), {:spanish, "Luiza"})
+    #send(self(), {:french, "Bob"})
+
+    receive do
+      {:german, name} -> IO.puts "Guten Tag, #{name}"
+      {:french, name} -> IO.puts "Bonjour, #{name}"
+      {:kiwi, name} -> IO.puts "Kia ora, #{name}"
+
+    after
+      500 -> IO.puts "Time up"
+    end
   end
 end
